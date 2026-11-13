@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: |cffffcc00Calendar|cffffffffRestore
+## Author: HighlordSigmar
+## Notes: Brings the minimap calendar / day-night button back when ShaguTweaks "MiniMap Tweaks" hides it.
+## Version: 1.0
+## OptionalDeps: ShaguTweaks, ShaguTweaks-extras
+## SavedVariablesPerCharacter: CalendarRestoreDB
+
+CalendarRestore.lua
