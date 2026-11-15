@@ -1,4 +1,4 @@
--- CalendarRestore
+-- Cronos
 -- ShaguTweaks' "MiniMap Tweaks" module hides GameTimeFrame (the sun/moon
 -- button on the minimap, which the server's calendar hangs off) and adds an
 -- OnShow script that hides it again every time something shows it.
@@ -6,8 +6,8 @@
 -- while leaving the rest of MiniMap Tweaks (mousewheel zoom etc.) alone.
 --
 -- Extras: Shift + drag the button to move it (saved per character).
--- /calrestore reset   - put the button back in its default spot
--- /calrestore show    - force the button to show again
+-- /cronos reset   - put the button back in its default spot
+-- /cronos show    - force the button to show again
 
 if not GameTimeFrame then return end
 
@@ -25,12 +25,12 @@ do
 end
 
 local function Print(msg)
-  DEFAULT_CHAT_FRAME:AddMessage("|cffffcc00Calendar|cffffffffRestore:|r " .. msg)
+  DEFAULT_CHAT_FRAME:AddMessage("|cffffcc00Cronos:|r " .. msg)
 end
 
 local function ApplyPosition()
   GameTimeFrame:ClearAllPoints()
-  local p = CalendarRestoreDB and CalendarRestoreDB.point
+  local p = CronosDB and CronosDB.point
   if p then
     GameTimeFrame:SetPoint(p[1], UIParent, p[2], p[3], p[4])
   elseif defaultPoint[1] then
@@ -60,7 +60,7 @@ local function Restore()
     -- store relative to UIParent so it survives reloads
     local x, y = this:GetCenter()
     local scale = this:GetEffectiveScale() / UIParent:GetEffectiveScale()
-    CalendarRestoreDB.point = { "CENTER", "BOTTOMLEFT", x * scale, y * scale }
+    CronosDB.point = { "CENTER", "BOTTOMLEFT", x * scale, y * scale }
     ApplyPosition()
   end)
 
@@ -72,7 +72,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("VARIABLES_LOADED")
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 f:SetScript("OnEvent", function()
-  if not CalendarRestoreDB then CalendarRestoreDB = {} end
+  if not CronosDB then CronosDB = {} end
   Restore()
 
   -- run once more a moment later, in case anything hides it after us
@@ -84,11 +84,11 @@ f:SetScript("OnEvent", function()
   end)
 end)
 
-SLASH_CALENDARRESTORE1 = "/calrestore"
-SlashCmdList["CALENDARRESTORE"] = function(msg)
+SLASH_CRONOS1 = "/cronos"
+SlashCmdList["CRONOS"] = function(msg)
   msg = string.lower(msg or "")
   if msg == "reset" then
-    CalendarRestoreDB.point = nil
+    CronosDB.point = nil
     ApplyPosition()
     Print("button moved back to its default spot.")
   elseif msg == "show" then
@@ -96,7 +96,7 @@ SlashCmdList["CALENDARRESTORE"] = function(msg)
     Print("button shown.")
   else
     Print("Shift + drag the button to move it.")
-    Print("/calrestore reset - default position")
-    Print("/calrestore show - force it to show")
+    Print("/cronos reset - default position")
+    Print("/cronos show - force it to show")
   end
 end
