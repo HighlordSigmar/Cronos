@@ -8,7 +8,7 @@ MiniMap Tweaks hides `GameTimeFrame` (the sun/moon button at the top-right of th
 
 1. Download the repository (**Code → Download ZIP**).
 2. Extract it into `World of Warcraft\Interface\AddOns\`.
-3. Rename the folder from `Calendar-main` to **`Cronos`**. The folder name has to match `Cronos.toc`.
+3. Rename the folder from `Cronos-main` to **`Cronos`**. The folder name has to match `Cronos.toc`.
 4. Restart the game.
 
 ## Usage
